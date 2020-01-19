@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Text-Based RPG</title>
+    <link rel="stylesheet" href="/static/game.css"/>
+    <script src="/static/game.js"></script>
+  </head>
+  <body>
+    <h1>GAME</h1>
+    <div class="table" id="table">
+      <div class="row">
+        <div class="cell">
+          <p> <input type="text" id="input" class="input" value="Enter commands here"><button id="button" onclick="sendInput();">-&gt;</button></p>
+          <p> <textarea rows="50" cols="100" id="output" class="output" >How to play:
+ To make a choice, type the number in the parenthesis next to it.
+ The game is over when health = 0.
+ End goal...
+Survive nuclear holocaust at NCSSM...
+Game over
+Choose your character:
+ (1) Physics student
+ (2) Chemistry student
+ (3) Biology student
+Which character do you choose? 1, 2, or 3?
+ </textarea></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

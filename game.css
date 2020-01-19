@@ -1,0 +1,40 @@
+h1,h2,.display{
+  text-align: center;
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p{
+  padding:1em;
+}
+
+.output{
+  height:400px;
+  width:600px;
+}
+
+.input{
+  width:575px;
+}
+
+
+input{
+  word-wrap: break-word;
+}
+
+.table{
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row{
+  display: table-row;
+}
+
+.cell{
+  display: table-cell;
+}
