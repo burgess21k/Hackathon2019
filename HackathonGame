@@ -1,0 +1,454 @@
+import time
+import random
+
+#introduction
+print('How to play: \n To make a choice, type the number in the parenthesis next to it. \n The game is over when health = 0. \n End goal...')
+time.sleep(2)
+print('Survive nuclear holocaust at NCSSM...')
+
+
+#initial stats
+endurance = 0
+strength = 0
+knowledge = 0
+wisdom = 0
+charisma = 0
+health = endurance * 5 
+mutanthealth = 80
+
+#needed functions
+def eat():
+  global health
+  print("You decide to eat the food. It tastes like... nothing.")
+  health += health
+  print("Congratulations! You have performed one of the elementary functions of a human being. As a reward, your health has increased by 10 points. You now have %i health points."%health)
+
+def mexico():
+  mexicoreport = raw_input("Quickly, you have a decision to make! Do you... \n (1) Explain your entire backstory \n or \n (2) Ask for medical attention?")
+  if mexicoreport == "1":
+    print("You scramble to explain that you are a student from NCSSM that is in dire need of help. You are the only one left from the school, as the others had died fighting off mutants or from the lack of medicine on campus. You beg for treatment for your cancer.")
+    time.sleep(6)
+    print("The man stares at you for a second.")
+    time.sleep(3)
+    print("He asks you what subject you studied in school.")
+    time.sleep(2)
+    liar = raw_input("How do you respond? \n lie \n truth")
+    if liar == "truth":
+      print("You nearly trip over your words as you admit that you are a %s student."%knowncharacter)
+      time.sleep(2)
+      print("The man's face lights up as he asks you about a fellow classmate. You nod vigorously and begin recounting memories from your time together in classes. You smile and laugh together as the man's eyes slowly tear up.")
+      time.sleep(4)
+      print("He reveals that that student was his niece. Your face falls as you realize the grave news you are delivering to this stranger. You feel the tears in your eyes become heavy. You cry with the man for a while.")
+      time.sleep(6)
+      print("Eventually, the man's crying stops and he sits in silence for some time.")
+      time.sleep(4)
+      print("The man apologizes for crying and reveals that he was a doctor before the disaster. He helps you treat the cancer and allows you to live in his homestead.")
+      time.sleep(3)
+      print("You recover from cancer and live happily with the man for a few months.")
+    if liar == "lie":
+      print("The man mutters under his breath and yells at you angrily. You flee the store. You continue through the wasteland.")
+  if mexicoreport == "2":
+    print("The man mutters under his breath and yells at you angrily. You flee the store. You continue through the wasteland.")
+  
+def outsideintro():
+  print("You exit the building and look around. Debris is strewn about the street. You are alone.")
+  time.sleep(2)
+  print(".")
+  time.sleep(2)
+  print('.')
+  time.sleep(4)
+  print('Suddenly, a mutated student steps out of the brush! The extra arm sprouting from their left shoulder almost distracts from their green-tinged skin... almost...')
+  time.sleep(2)
+
+def game():
+  if knowncharacter == "Physics":
+    scramble = "TNUQAMU"
+    word = "QUANTUM"
+  elif knowncharacter == "Chemistry":
+    scramble = "RMATOLIY"
+    word = "MOLARITY"
+  else:
+    scramble = "OPDMNIAE"
+    word = "DOPAMINE"
+  print("When you attempt to proclaim yourself leader of the group, another %s student challenges you. Before a fight breaks out, a student exclaims that you should have a battle of the wits to determine who is the better %s student." %(knowncharacter,knowncharacter))
+  time.sleep(5)
+  print("The game is simple. A scrambled word pertaining to %s will appear. If you are able to figure out the word, you will be proclaimed leader. Type the word in all caps." %knowncharacter)
+  time.sleep(6)
+  print("However, if you are incorrect, the challenger will have a chance to claim victory. Good luck!")
+  time.sleep(5)
+  answer = raw_input("Alright, player. Here is your scramble: %s"%scramble)
+  if answer == word:
+    print("Congratulations! You are correct and have been proclaimed the leader of the group.")
+  else:
+    print("Too bad, you are incorrect. The challenger was able to correctly guess the word to be %s and has been proclaimed leader. It's probably for the best."%word)
+  
+
+def combat():
+  global mutanthealth
+  global health
+  while mutanthealth > 0:
+    fightchoice = raw_input("What would you like to do? \n fight \n flee \n talk")
+    if fightchoice == 'fight':
+      print("You swing a fist at him.")
+      damage = random.randrange(1,10,1)
+      truedamage = damage + strength
+      time.sleep(1)
+      if truedamage > 16:
+        print("Critical hit! You dealt %i points of damage." %truedamage)
+        time.sleep(1)
+      if truedamage <= 16:
+        print("You dealt %i points of damage." %truedamage)
+        time.sleep(1)
+      mutanthealth = mutanthealth - truedamage
+      if mutanthealth > 0:
+        print("The mutant now has %i points of health." %mutanthealth)
+        time.sleep(1)
+      if mutanthealth <= 0:
+        time.sleep(1)
+    if fightchoice == 'flee':
+      print('You attempt to escape.')
+      time.sleep(1)
+      fleechance = wisdom + knowledge
+      winner = random.randrange(1, fleechance, 1)
+      if winner <= 5:
+        print("You were unable to escape.")
+      if winner > 5:
+        break
+    if fightchoice == 'talk':
+      print("You perform a heartwarming speech about the consequences of unneeded violence and the importance of friendship and understanding in a cold, dark world such as our own.")
+      time.sleep(4)
+      print("The mutant grunts. I'm not sure what you expected.")
+    if mutanthealth <= 0:
+      print("The mutant is dead.")
+      time.sleep(1)
+      break
+    print("The mutant swings at you.")
+    time.sleep(1)
+    mutanthit = random.randrange(5,15,1)
+    mutantchance = random.randrange(0,50,1)
+    if mutantchance >= wisdom:
+      print("The mutant's slimy, disfigured hand collides with your face. For a second, you think you're seeing double until you remember the mutant naturally has too many body parts. You receive %i points of damage."%mutanthit)
+      health = health - mutanthit
+      time.sleep(5)
+      print("Your health is now %i." %health)
+    if mutantchance < wisdom:
+      print("You narrowly dodge the mutant's fist. As it whizzes by you, you smell the faint yet distinct odor of irradiated flesh. Gross.")
+      time.sleep(5)
+      print("You now have %i points of health."%health)
+  print("You escaped.") 
+  stats()
+
+# stats function 
+def stats():
+  print('endurance = ' + str(endurance))
+  print('strength = ' + str(strength))
+  print('knowledge = ' + str(knowledge))
+  print('wisdom = ' + str(wisdom))
+  print('charisma = ' + str(charisma))
+  print('HEALTH = ' + str(health))
+# game over
+if health < 5:
+  print('Game over')
+  exit  
+# just incase
+def input_error():
+  print('Can you please retype your answer?')
+  input()
+
+#choosing the character
+print('Choose your character: \n (1) Physics student \n (2) Chemistry student \n (3) Biology student')
+character = raw_input('Which character do you choose? 1, 2, or 3')
+if character == '1':
+  endurance = 16
+  strength = 20
+  knowledge = 2
+  wisdom = 10
+  charisma = 15
+  health = endurance * 5 
+  stats()
+  print("Welcome, Physics Student! Your expertise in quantum mechanics and nuclear physics will prove helpful in your quest.")
+  time.sleep(3)
+  knowncharacter = 'Physics'
+elif character == '2':
+  endurance = 18
+  strength = 10
+  knowledge = 7
+  wisdom = 5
+  charisma = 20
+  health = endurance * 5 
+  stats()
+  print("Welcome, Chemistry Student! I'm sure your knowledge of the periodic table and electron orbitals will save the day... somehow...")
+  time.sleep(3)
+  knowncharacter = 'Chemistry'
+else:
+  endurance = 20
+  strength = 5
+  knowledge = 20
+  wisdom = 20
+  charisma = 10
+  health = endurance * 5 
+  stats()  
+  print("Welcome, Biology Student! As a master of anatomy and physiology, you will surely save many along your journey. In addition, your constant exposure to experiments on animals has made you numb to killing. So that's cool, too.")
+  time.sleep(5)
+  knowncharacter = 'Biology'
+  
+#actual beginning
+print('The game will now commence...')
+time.sleep(3)
+
+#beginning decision
+print('P1: What is happening? What is that sound? What now?')
+print('Choose your next path...\n')
+print('(4) Safe outside \n(5) underground in hunt/hill/royall \n(6) windowless room in BBR')
+choice = raw_input('Which path: 4, 5, or 6')
+##wrong decision - immediate death
+if choice == '4':
+  print('You have chosen to stay outside')
+  endurance = endurance - 20
+#safe deicison
+elif choice == '5':
+  print('You have chosen to stay underground')
+  stats()
+  print('You have an assignment due tomorrow, but your friend is underground with you. Both of you are oblivious of what is occuring you decide to either (7) read the assignment or (8) comfort and socialize with your friend')
+  read_social = raw_input()
+  if read_social == 7:
+    knowledge = knowledge + 2
+    print('you have gained two points in knowledge!')
+  else:
+    charisma = charisma + 2
+    print('you have gained two points in charisma!')
+  time.sleep(1)
+  stats()
+  print('You are alone with your friend \n')
+  time.sleep(3)
+  print('or are you')
+#mutant decision
+elif choice == '6':
+  print('You are now a disgusting mutant with almost zero will to live \n')
+  time.sleep(2)
+  charisma = 0
+  endurance = endurance - 2
+  strength = strength + 3
+  wisdom = wisdom + 5
+  stats()
+  print('You are awoken by a jarring blare. The voice of the chancellor rings throughout your dorm room.')
+else:
+  input_error()
+#announcement 
+time.sleep(3)
+def JTodd():
+  print('Chancellor: students, we are under attack. Nuclear war has begun. DO NOT LEAVE')
+JTodd()
+time.sleep(4)
+JTodd()
+time.sleep(4)
+JTodd()
+time.sleep(4)
+#combat sequence
+time.sleep(3)
+outsideintro()
+combat()
+
+#after announcement
+time.sleep(5)
+print('Where is my friend??')
+print('Everything is gone...')
+time.sleep(2)
+print('Where is everyone?')
+time.sleep(2)
+print('I need to find (9) food or water or (10) someone to help')
+needs = raw_input('Which necessity do I need most?: 9 or 10')
+#food/water
+if needs == '9':
+  print('You have chosen to search for food or water')
+  print('.')
+  time.sleep(1)
+  print('.')
+  print('YOU HAVE BEEN ATTACKED')
+  #mutant recognizes you
+  if choice == '6':
+    print('The mutant is confused...')
+    time.sleep(1)
+    print('You suddenly recognize that you are one of them... \n')
+    print('Your will is slowly slipping away...')
+    print('The mutation is affecting your actions, thoughts, consciousness')
+    print('.')
+    time.sleep(1)
+    print('.')
+    time.sleep(1)
+    print('.')
+    time.sleep(1)
+    print('You join them...')
+    time.sleep(2)
+    print('Or not')
+    print('You recognize this may be the only path to survival, but what will this say about you?')
+    #Decision
+    if raw_input('What is your descision?: y/n') == 'y':
+      print('You have joined the mutants')
+      time.sleep(5)
+      print('Your alternative ending: joined the mutants')
+      exit
+    elif raw_input('What is your descision?: y/n') == 'n':
+      wisdom = 20
+      knowledge = 20
+      stats()
+      print('Hope you are ready to fight for your life!!')
+      time.sleep(3)
+      combat()
+      print('After your exhausting fight you find some food')
+      eat()
+    else:
+      input_error()
+  #just combat if regular
+  else:
+    print('You have chosen to search for food or water')
+    print('.')
+    time.sleep(1)
+    print('.')
+    print('YOU HAVE BEEN ATTACKED')
+    combat()
+    print('Who is that?')
+    print('.')
+    time.sleep(1)
+    print('.')
+    print('it looks like a band of RPhys kids...')
+    print('.')
+    time.sleep(1)
+    print('.')
+    print('What is happening here?')
+   #ending with rphys
+    time.sleep(4)
+    print('Your alternative ending: group of NCSSM students that chose to be clumsy on the wrong experiment')
+    exit
+#going for the people
+elif needs == '10':
+  print('You have chosen to look for people')
+  print('Hill is destroyed, Royall... oof. The only two places left are (11) BBR or (12) Hunt')
+  print('However, you need to know information before a descision is made')
+  print('.')
+  time.sleep(1)
+  print('.')
+  time.sleep(1)
+  print('BBR is filled with people; however, that means many may be killer mutants')
+  print('Hunt likely does not have people, and, if it does than it could be a trap')
+  ##BBR
+  bbr_hunt = raw_input('What is your final desicion?: 11 or 12')
+  if bbr_hunt == '11':
+    print('You have chosen BBR. You make your way to the desk. You look around and you see no one')
+    print('You go back to your room and find food')
+    time.sleep(2)
+    print('There is someone here...')
+    time.sleep(1)
+    print('.')
+    time.sleep(1)
+    print('.')
+    print('What is my bio teacher doing here?')
+    combat()
+  #Hunt
+  elif bbr_hunt == '12':
+    print('Who is that??')
+    time.sleep(2)
+    print('Are they mutants?')
+    time.sleep(2)
+    print('They are not!')
+    print('You find the group, defeat all mutants, and make it out of campus')
+    time.sleep(.5)
+    print('.')
+    time.sleep(.5)
+    print('.')
+    time.sleep(.5)
+    print('.')
+    time.sleep(.5)
+    print('.')
+    print('after dark')
+    time.sleep(.5)
+    print('Spoiler Alert: you have not escaped')
+    time.sleep(3)
+    print('You are knocked out')
+    game()
+    time.sleep(3)
+    print('everything is a blur...')
+  else:
+    input_error()
+else:
+  input_error()
+
+print('There is a figure appearing out of thin air...')
+time.sleep(2)
+print('It is our chancellor, JTodd')
+time.sleep(2)
+print('JTodd: You are not quite done with your journey')
+time.sleep(1)
+print('z')
+time.sleep(1)
+print('z')
+time.sleep(1)
+print('z')
+time.sleep(2)
+print('Current setting: 5 years after blast')
+time.sleep(3)
+endurance = 20
+strength = 20
+knowledge = 20
+wisdom = 20
+charisma = 20
+health = endurance * 5 
+print('*game side bar*')
+print('you now have restored stats!!!!')
+stats()
+time.sleep(7)
+print('You wake up from your dream newly inspired to beat the day')
+print('You defeat your morning mutant with ease...')
+time.sleep(4)
+combat()
+print('Everyday the radiation slowly eats you away')
+print('Everyone is gone... you are the last one standing...')
+time.sleep(5)
+print('You need to find a doctor fast, but there is no one left in the country to help. You know what you have to do (13) stay and hope someone will find you or (14) venture out into the unknown and find a cure')
+mypath = raw_input('What will be your path?: 13 or 14')
+if mypath == '13':
+  print('One year later you die from cancer')
+  time.sleep(1)
+  print('.')
+  time.sleep(1)
+  print('.')
+  print('alone')
+  endurance = 0
+elif mypath == '14':
+  print('You travel far and long in a broken down Toyota Corola until you hit what used to be known as Mexico')
+  time.sleep(2)
+  print('The fallout affected it just as much as the US')
+  time.sleep(3)
+  print('You see a store will you enter?')
+  goingin = raw_input('Will you go in?: y/n')
+  if goingin == 'n':
+    print('You continue along')
+  elif goingin == 'y':
+    print('You found food!!')
+    eat()
+    stats()
+    time.sleep(5)
+else:
+  input_error()
+print('You find a medical clinic')
+print('.')
+time.sleep(1)
+print('.')
+time.sleep(1)
+print('Maybe there is something inside...')
+print('FREEZE, WHO ARE YOU?!?!?')
+time.sleep(1)
+print('You can either: (15) explain you are in dire need of medical assitance (16) give them a long background')
+time.sleep(3)
+saying = raw_input('What will you say: 15 or 16?')
+if saying == '15':
+  print('They have a mutant soldier just for this occasion')
+  combat()
+elif saying == '16':
+  mexico()
+else:
+  input_error()
+print('Congragulations!! You not only found a cure but found society not more than 5 miles away from the medicial clinic. The government encased the United States in a quarantine like state where they were able to control output radiation. Society lives..')
+time.sleep(5)
+print('Your alternative ending: the ultimate one')
+exit
